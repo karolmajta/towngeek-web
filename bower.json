@@ -1,0 +1,21 @@
+{
+  "name": "towngeek-web",
+  "version": "0.0.1",
+  "authors": [
+    "Karol Majta <karolmajta@gmail.com>"
+  ],
+  "description": "Towngeek webapp",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.0.7",
+    "bootstrap": "~3.0.0"
+  }
+}

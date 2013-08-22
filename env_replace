@@ -1,0 +1,17 @@
+#! /usr/bin/python
+
+import sys
+
+print sys.argv
+
+key, value = sys.argv[1], sys.argv[2]
+filenames = [line.rstrip() for line in sys.stdin.readlines()][:-1]
+
+for filename in filenames:
+    with open(filename, 'r') as fp:
+        contents = fp.read()
+    replaced = contents.replace("***{0}***".format(key), value)
+    with open(filename, 'w') as fp:
+        fp.write(replaced)
+
+sys.exit(0)

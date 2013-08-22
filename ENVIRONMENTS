@@ -1,0 +1,10 @@
+module.exports = {
+  production: {
+    version: "0.0.1",
+    api_root: "http://api.towngeek.pl"
+  },
+  development: {
+    version: "0.0.1",
+    api_root: "http://localhost:8000",
+  }
+}
