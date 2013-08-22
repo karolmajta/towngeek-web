@@ -13,7 +13,7 @@ jsMainFile = 'src/main.js'
 versionFile = 'VERSION'
 
 coffeeFiles = [
-  {'infile': 'dir/ala123.coffee', 'outdir': 'dir1'},
+#  {'infile': 'dir/ala123.coffee', 'outdir': 'dir1'},
 ]
 
 lessMain = 'styles.less'
@@ -47,7 +47,7 @@ task 'build', "Build app", () ->
   cmd = "lessc #{lessSrcDir}/#{lessMain} #{cssTargetDir}/#{cssMain}"
   exec cmd, (err, stdio, stderr) ->
     if err
-      util.log stio
+      util.log stdio
       util.log stderr
   util.log "templates -> templates"
   exec "cp -r src/templates build/templates", (err, stdout, stderr) ->
