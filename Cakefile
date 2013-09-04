@@ -76,5 +76,5 @@ task 'version', "Version a distribution", () ->
 task 'package', "", () ->
   version = environments[process.env.TGENV].version
   name = "towngeek-web-#{version}-#{process.env.TGENV}"
-  cmd = "cd dist && cp -r ../build #{name} && rm -r #{name}/bower_components && cp ../bower.json #{name}/bower.json && tar -zcvf #{name}.tar.gz #{name} && rm -r #{name}"
+  cmd = "cd dist && cp -r ../build #{name} && rm #{name}/bower_components && cp ../bower.json #{name}/bower.json && tar -zcvf #{name}.tar.gz #{name} && rm -r #{name}"
   exec cmd
