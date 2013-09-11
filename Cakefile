@@ -13,7 +13,18 @@ jsMainFile = 'src/main.js'
 versionFile = 'VERSION'
 
 coffeeFiles = [
-#  {'infile': 'dir/ala123.coffee', 'outdir': 'dir1'},
+  {'infile': 'application.coffee', 'outdir': ''},
+
+  {'infile': 'factories/TGPaginatedResource.coffee', 'outdir': 'factories'},
+
+  {'infile': 'providers/TGResourceProvider.coffee', 'outdir': 'providers'},
+  {'infile': 'providers/currentUserProvider.coffee', 'outdir': 'providers'},
+
+  {'infile': 'controllers/PageController.coffee', 'outdir': 'controllers'},
+  {'infile': 'controllers/TopBarController.coffee', 'outdir': 'controllers'},
+
+  {'infile': 'controllers/QuestionListController.coffee', 'outdir': 'controllers'},
+  {'infile': 'controllers/QuestionController.coffee', 'outdir': 'controllers'},
 ]
 
 lessMain = 'styles.less'

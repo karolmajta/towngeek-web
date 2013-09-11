@@ -1,7 +1,53 @@
-<!doctype html>
-<html>
-  <head>
-  </head>
-  <body>
-  </body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Towngeek</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/bower_components/bootstrap/dist/css/bootstrap-theme.min.css" rel="stylesheet">
+    <!-- Custom styles -->
+    <link href="/***version***/css/styles.css" rel="stylesheet">
+</head>
+
+<body ng-app="tg">
+
+    <div ng-controller="PageController">
+        <div ng-include="'/***version***/templates/fragments/top_bar.html'">
+        </div>
+        <div ng-view class="container">
+        </div>
+    </div>
+
+    <!-- super fast loading of da-bomb 3rd party js modules -->
+    <script src="/bower_components/underscore/underscore-min.js" lang="javascript" type="text/javascript"></script>
+    <script src="/bower_components/underscore.string/dist/underscore.string.min.js" lang="javascript" type="text/javascript"></script>
+    <script src="/bower_components/jquery/jquery.min.js" lang="javascript" type="text/javascript"></script>
+    <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js" lang="javascript" type="text/javascript"></script>
+    <script src="/bower_components/angular/angular.min.js" lang="javascript" type="text/javascript"></script>
+    <script src="/bower_components/angular-cookies/angular-cookies.min.js" lang="javascript" type="text/javascript"></script>
+
+    <!-- dat app -->
+    <script src="/***version***/js/factories/TGPaginatedResource.js" lang="javascript" type="text/javascript"></script>
+
+    <script src="/***version***/js/providers/TGResourceProvider.js" lang="javascript" type="text/javascript"></script>
+    <script src="/***version***/js/providers/currentUserProvider.js" lang="javascript" type="text/javascript"></script>
+
+    <script src="/***version***/js/controllers/PageController.js" lang="javascript" type="text/javascript"></script>
+    <script src="/***version***/js/controllers/TopBarController.js" lang="javascript" type="text/javascript"></script>
+
+    <script src="/***version***/js/controllers/QuestionListController.js" lang="javascript" type="text/javascript"></script>
+    <script src="/***version***/js/controllers/QuestionController.js" lang="javascript" type="text/javascript"></script>
+
+    <!-- load config for this build -->
+    <script src="/***version***/js/main.js" lang="javascript" type="text/javascript"></script>
+
+    <!-- and fire the app! -->
+    <script src="/***version***/js/application.js" lang="javascript" type="text/javascript"></script>
+</body>
 </html>
