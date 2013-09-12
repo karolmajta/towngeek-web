@@ -3,19 +3,30 @@ application = angular.module('tg', ['ng', 'ngCookies'])
 application.constant('API_ROOT', @TGENV.api_root)
 application.constant('USER_COOKIE_NAME', "tgUserCookie")
 application.constant('ANON_NAME', "Anonymous User")
+application.constant('ON_LOGIN_PATH', "/")
+application.constant('FORBIDDEN_PATH', "/forbidden/")
 
 application.factory('TGPaginatedResource', @tg.factories.TGPaginatedResource)
+application.factory('unauthorizedInterceptor', @tg.factories.unauthorizedInterceptor)
 
 application.provider('TGResource', @tg.providers.TGResourceProvider)
 application.provider('currentUser', @tg.providers.currentUserProvider)
 
 application.controller('PageController', @tg.controllers.PageController)
 application.controller('TopBarController', @tg.controllers.TopBarController)
-
 application.controller('QuestionListController', @tg.controllers.QuestionListController)
 application.controller('QuestionController', @tg.controllers.QuestionController)
+application.controller('LoginController', @tg.controllers.LoginController)
+application.controller('ProfileController', @tg.controllers.ProfileController)
+application.controller('CityKnowledgeController', @tg.controllers.CityKnowledgeController)
+application.controller('ForbiddenController', @tg.controllers.ForbiddenController)
 
-application.config( ($routeProvider, TGResourceProvider) ->
+application.config( ($routeProvider, $httpProvider, TGResourceProvider) ->
+
+  """
+  Add the interceptor for handling 401 and 403 responses
+  """
+  $httpProvider.responseInterceptors.push('unauthorizedInterceptor');
 
   """
   Configuration of remote resources.
@@ -28,7 +39,7 @@ application.config( ($routeProvider, TGResourceProvider) ->
     .canGet()
   TGResourceProvider.hasResource('city', '/locations/cities/')
     .canGet()
-  TGResourceProvider.hasResource('city', '/locations/city-knowledges/')
+  TGResourceProvider.hasResource('city-knowledge', '/locations/city-knowledges/')
     .canGet()
     .canPost()
     .canDelete()
@@ -61,7 +72,7 @@ application.config( ($routeProvider, TGResourceProvider) ->
       templateUrl: "#{ @TGENV.version }/templates/register.html",
       controller: 'RegistrationController'
     }
-  ).when('/profile/:id',
+  ).when('/profiles/:id',
     {
       templateUrl: "#{ @TGENV.version }/templates/profile.html",
       controller: 'ProfileController'
@@ -78,8 +89,8 @@ application.config( ($routeProvider, TGResourceProvider) ->
     }
   ).when('/questions/:id',
     {
-    templateUrl: "#{ @TGENV.version }/templates/question.html",
-    controller: 'QuestionController'
+      templateUrl: "#{ @TGENV.version }/templates/question.html",
+      controller: 'QuestionController'
     }
   ).when('/not-found/',
     {
@@ -88,6 +99,7 @@ application.config( ($routeProvider, TGResourceProvider) ->
   ).when('/forbidden/',
     {
       templateUrl: "#{ @TGENV.version }/templates/403.html",
+      controller: 'ForbiddenController'
     }
   ).otherwise(
     {
@@ -95,4 +107,9 @@ application.config( ($routeProvider, TGResourceProvider) ->
     }
   )
 
+)
+
+application.run( (currentUser, $http, $log) ->
+  if currentUser.isLoggedIn()
+    $http.defaults.headers.common['Authorization'] = "Token #{ currentUser.fromNetwork.token }"
 )

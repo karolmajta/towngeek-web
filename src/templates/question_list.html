@@ -4,8 +4,18 @@
             <li ng-controller="QuestionController">
                 <a href="/#/questions/{{ question.id }}">{{ question.text }}</a>
                 <ul>
-                    <li><em>Autor:</em> {{ question.issued_by.first_name }} {{ question.issued_by.last_name }}</li>
-                    <li><em>Miasto:</em> {{ question.city.name }}</li>
+                    <li>
+                        <em>Autor: </em>
+                        <a ng-href="/#/profiles/{{ question.issued_by.id }}">
+                            {{ question.issued_by.first_name }} {{ question.issued_by.last_name }}
+                        </a>
+                    </li>
+                    <li>
+                        <em>Miasto: </em>
+                        <a ng-href="/#/cities/{{ question.city.id }}">
+                            {{ question.city.name }}
+                        </a>
+                    </li>
                     <li><em>Data:</em> {{ question.issued_at }}</li>
                     <li><em>Ulubiony:</em> {{ question.bookmark_count }}</li>
                     <li><em>Mój ulubiony:</em> <input type="checkbox" ng-checked="question.is_bookmarked"></li>

@@ -6,9 +6,20 @@
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
-
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <span ng-show="currentUser.isLoggedIn()">{{ currentUser.fullName() }} <b class="caret"></b></span>
+                        <span ng-show="currentUser.isAnonymous()">Gość <b class="caret"></b></span>
+                    </a>
+                    <ul class="dropdown-menu" ng-show="currentUser.isLoggedIn()">
+                        <li><a ng-href="/#/profiles/{{ currentUser.id() }}">Mój profil</a></li>
+                        <li><a href ng-click="currentUser.logout()">Wyloguj</a></li>
+                    </ul>
+                    <ul class="dropdown-menu" ng-show="currentUser.isAnonymous()">
+                        <li><a ng-href="/#/login/">Zaloguj</a></li>
+                    </ul>
                 </li>
             </ul>
         </div><!--/.navbar-collapse -->
+
     </div>
 </div>

@@ -1,0 +1,30 @@
+<div class="row" ng-show="user">
+    <div class="col-lg-12">
+        <h1 ng-show="currentUser.id() != user.id">{{ currentUser.id }} {{ user.first_name }}<span ng-show="user.last_name">{{ user.last_name }}</span></h1>
+        <h1 ng-show="currentUser.id() == user.id">Twój profil</h1>
+    </div>
+    <div class="col-lg-12" ng-show="cityKnowledges != null && currentUser.id() != user.id">
+        <h3>Znajome miasta</h3>
+        <ul ng-show="cityKnowledges.length > 0" ng-repeat="cityKnowledge in cityKnowledges">
+            <li><a ng-href="/#/cities/{{ cityKnowledge.city.id }}">{{ cityKnowledge.city.name }}</a></li>
+        </ul>
+        <p ng-show="cityKnowledges.length == 0">
+            Wygląda na to, że  {{ user.first_name }} nie jest związany z żadnym miastem.
+        </p>
+    </div>
+    <div class="col-lg-12" ng-show="cityKnowledges != null && currentUser.id() == user.id">
+        <h3>Twoje znajome miasta</h3>
+        <p ng-show="cityKnowledges.length == 0">
+            Wygląda na to, że nie jesteś związany z żadnym miastem. Może chciałbyś to zmienić? Zaznacz miasta,
+             które znasz!
+        </p>
+        <div ng-repeat="city in cities">
+            <div ng-controller="CityKnowledgeController" ng-init="init(city)">
+                <input type="checkbox"
+                    ng-checked="userHasKnowledge()" ng-click="toggleKnowledge()" ng-disabled="isFetching">
+                    <a ng-href="/#/cities/{{ city.id }}">{{ city.name }}</a>
+                </input>
+            </div>
+        </div>
+    </div>
+</div>

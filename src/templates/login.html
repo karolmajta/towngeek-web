@@ -1,0 +1,24 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h1>Zaloguj się</h1>
+        <div class="alert alert-danger" ng-show="formMeta.hadError">
+            <strong>Ups...</strong> Nie udało się zalogować. Czy podałeś prawidłowy email i hasło?
+        </div>
+        <form role="form" name="loginForm" ng-submit="attemptLogin()">
+            <div class="form-group">
+                <label for="email">Adres email</label>
+                <input type="email" class="form-control" id="email" name="email"
+                    ng-model="credentials.email">
+            </div>
+            <div class="form-group">
+                <label for="password">Hasło</label>
+                <input type="password" class="form-control" id="password" name="password"
+                    ng-model="credentials.password">
+            </div>
+            <button type="submit" class="btn btn-default" ng-disabled="formMeta.isFetching">Submit</button>
+        </form>
+        <p>
+            Nie masz jeszcze konta? <a href="/#/register/">Zarejestruj się</a>, zajmie ci to kilka sekund.
+        </p>
+    </div>
+</div>

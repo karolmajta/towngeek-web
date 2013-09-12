@@ -4,7 +4,7 @@ $$ = @tg.providers
 
 $$.currentUserProvider =
 
-  $get: ($log, $location, $cookieStore, TGResource, USER_COOKIE_NAME, ANON_NAME) ->
+  $get: ($log, $location, $cookieStore, $http, TGResource, USER_COOKIE_NAME, ANON_NAME) ->
 
     cu =
       fromNetwork:
@@ -16,7 +16,7 @@ $$.currentUserProvider =
 
     cu.isAnonymous = () ->
       cu.lazyLoginFromCache()
-      cu.fromNetwork.token is null
+      not (cu.fromNetwork.user and cu.fromNetwork.token)
 
     cu.isLoggedIn = () -> not cu.isAnonymous()
 
@@ -32,8 +32,14 @@ $$.currentUserProvider =
           n = fn
         return n
 
+    cu.id = () ->
+      if cu.isAnonymous()
+        return null
+      else
+        return cu.fromNetwork.user.id
+
     cu.lazyLoginFromCache = () ->
-      if cu.fromNetwork
+      if cu.fromNetwork and cu.fromNetwork.token and cu.fromNetwork.user
         return
       else
         credentialsFromCache = $cookieStore.get(USER_COOKIE_NAME)
@@ -69,17 +75,19 @@ $$.currentUserProvider =
     cu.onFetchUserSuccess = (response, onSuccess) ->
       cu.fromNetwork.user = response.result
       $cookieStore.put(USER_COOKIE_NAME, cu.fromNetwork)
+      $http.defaults.headers.common['Authorization'] = "Token #{ cu.fromNetwork.token }"
       onSuccess(cu.fromNetwork.user)
 
     cu.onFetchUserError = (response, onFailure) ->
       cu.fromNetwork.token = null
       cu.fromNetwork.user = null
-      onFailure("Could not fetch user credentials from server...")
+      if onFailure then onFailure("Could not fetch user credentials from server...")
 
     cu.logout = (onSuccess) ->
       cu.fromNetwork.token = null
       cu.fromNetwork.user = null
       $cookieStore.remove(USER_COOKIE_NAME)
-      onSuccess()
+      delete $http.defaults.headers.common['Authorization']
+      if onSuccess then onSuccess()
 
     return cu

@@ -2,4 +2,6 @@
 @tg.controllers ?= {}
 $$ = @tg.controllers
 
-$$.TopBarController = ($scope, currentUser) ->
+$$.TopBarController = ($scope, $location, currentUser) ->
+
+  $scope.currentPath = () -> $location.path()

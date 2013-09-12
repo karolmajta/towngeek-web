@@ -16,15 +16,19 @@ coffeeFiles = [
   {'infile': 'application.coffee', 'outdir': ''},
 
   {'infile': 'factories/TGPaginatedResource.coffee', 'outdir': 'factories'},
+  {'infile': 'factories/unauthorizedInterceptor.coffee', 'outdir': 'factories'},
 
   {'infile': 'providers/TGResourceProvider.coffee', 'outdir': 'providers'},
   {'infile': 'providers/currentUserProvider.coffee', 'outdir': 'providers'},
 
   {'infile': 'controllers/PageController.coffee', 'outdir': 'controllers'},
   {'infile': 'controllers/TopBarController.coffee', 'outdir': 'controllers'},
-
   {'infile': 'controllers/QuestionListController.coffee', 'outdir': 'controllers'},
   {'infile': 'controllers/QuestionController.coffee', 'outdir': 'controllers'},
+  {'infile': 'controllers/ProfileController.coffee', 'outdir': 'controllers'},
+  {'infile': 'controllers/CityKnowledgeController.coffee', 'outdir': 'controllers'},
+  {'infile': 'controllers/ForbiddenController.coffee', 'outdir': 'controllers'},
+  {'infile': 'controllers/LoginController.coffee', 'outdir': 'controllers'},
 ]
 
 lessMain = 'styles.less'

@@ -24,19 +24,19 @@ TGResourceDescription = (apiRoot, url, providerHandle) ->
   @canPost = () ->
     @methods.post = (data, config) =>
       resourceUrl = "#{ apiRoot }#{ url }"
-      return p.$http(_.extend({method: "POST", url: resourceUrl}, config))
+      return p.$http(_.extend({method: "POST", url: resourceUrl, data: data}, config))
     return @
 
   @canPut = () ->
     @methods.put = (id, data, config) =>
       resourceUrl = "#{ apiRoot }#{ url }#{ id }"
-      return p.$http(_.extend({method: "PUT", url: resourceUrl}, config))
+      return p.$http(_.extend({method: "PUT", url: resourceUrl, data: data}, config))
     return @
 
   @canPatch = () ->
     @methods.patch = (id, data, config) =>
       resourceUrl = "#{ apiRoot }#{ url }#{ id }"
-      return p.$http(_.extend({method: "PATCH", url: resourceUrl}, config))
+      return p.$http(_.extend({method: "PATCH", url: resourceUrl, data: data}, config))
     return @
 
   @canDelete = () ->
@@ -64,8 +64,8 @@ $$.TGResourceProvider = (API_ROOT) ->
         get: resourceDescription.methods.get
         post: resourceDescription.methods.post
         put: resourceDescription.methods.put
-        patch: resourceDescription.methods
-        delete: resourceDescription.delete
+        patch: resourceDescription.methods.patch
+        delete: resourceDescription.methods.delete
       return resource
 
 

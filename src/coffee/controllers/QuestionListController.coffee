@@ -2,7 +2,7 @@
 @tg.controllers ?= {}
 $$ = @tg.controllers
 
-$$.QuestionListController = ($log, $scope, TGResource, TGPaginatedResource) ->
+$$.QuestionListController = ($log, $scope, $routeParams, TGResource, TGPaginatedResource) ->
 
   rQuestion = TGResource.getResource('question')
   rQuestionList = new TGPaginatedResource(rQuestion, 10)
@@ -19,11 +19,11 @@ $$.QuestionListController = ($log, $scope, TGResource, TGPaginatedResource) ->
 
   $scope.questions.fetchNextPage = () ->
     $scope.questions.showSpinner = true
-    rQuestionList.getNextPage({}, consumePage, consumeError )
+    rQuestionList.getNextPage({city: $routeParams.city}, consumePage, consumeError )
 
   $scope.questions.showSpinner = false
 
-  rQuestionList.getNextPage({},
+  rQuestionList.getNextPage({city: $routeParams.city},
     ( consumePage  ),
     ( consumeError )
   )
