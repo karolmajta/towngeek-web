@@ -29,6 +29,7 @@ coffeeFiles = [
   {'infile': 'controllers/CityKnowledgeController.coffee', 'outdir': 'controllers'},
   {'infile': 'controllers/ForbiddenController.coffee', 'outdir': 'controllers'},
   {'infile': 'controllers/LoginController.coffee', 'outdir': 'controllers'},
+  {'infile': 'controllers/RegistrationController.coffee', 'outdir': 'controllers'},
 ]
 
 lessMain = 'styles.less'

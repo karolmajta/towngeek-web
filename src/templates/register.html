@@ -1,0 +1,39 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h1>Zarejestruj się</h1>
+        <div class="alert alert-danger" ng-show="formMeta.hadError">
+            <p>
+                <strong>Ups...</strong> Wygląda na to, że ten email był już wykorzystany.
+            </p>
+        </div>
+        <div class="alert alert-warning" ng-show="!credentials.passwordsMatch()">
+            <p>
+                <strong>Ups...</strong> Hasła do siebie nie pasują.
+            </p>
+        </div>
+        <form role="form" name="registrationForm" ng-submit="attemptRegistration()">
+            <div class="form-group">
+                <label for="name">Imię i Nazwisko</label>
+                <input type="text" class="form-control" id="name" name="email"
+                       ng-model="credentials.name">
+            </div>
+            <div class="form-group">
+                <label for="email">Adres email</label>
+                <input type="email" class="form-control" id="email" name="email"
+                    ng-model="credentials.email">
+            </div>
+            <div class="form-group">
+                <label for="password1">Hasło</label>
+                <input type="password" class="form-control" id="password1" name="password1"
+                    ng-model="credentials.password1">
+            </div>
+            <div class="form-group">
+                <label for="password1">Powtórz hasło</label>
+                <input type="password" class="form-control" id="password2" name="password1"
+                       ng-model="credentials.password2">
+            </div>
+            <button type="submit" class="btn btn-default"
+                ng-disabled="formMeta.isFetching || !credentials.areValid()">Zarejestruj</button>
+        </form>
+    </div>
+</div>
