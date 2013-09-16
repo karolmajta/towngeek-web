@@ -6,6 +6,8 @@ $$.QuestionListController = ($log, $scope, $routeParams, TGResource, TGPaginated
 
   rQuestion = TGResource.getResource('question')
   rQuestionList = new TGPaginatedResource(rQuestion, 10)
+  rCity = TGResource.getResource('city')
+
   consumePage = (data) ->
     $scope.questions.showSpinner = false
     for elem in data then $scope.questions.push(elem)
@@ -27,3 +29,10 @@ $$.QuestionListController = ($log, $scope, $routeParams, TGResource, TGPaginated
     ( consumePage  ),
     ( consumeError )
   )
+
+  $scope.city = null
+  if $routeParams.city
+    rCity.get($routeParams.city).then(
+      ( (response) -> $scope.city = response.data.result ),
+      (response) ->
+    )
