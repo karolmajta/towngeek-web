@@ -7,6 +7,8 @@ application.constant('ON_LOGIN_PATH', "/")
 application.constant('FORBIDDEN_PATH', "/forbidden/")
 application.constant('IGNORE_FORBIDDEN_AT', ["/login/"])
 
+application.filter('nicedate', @tg.filters.nicedate)
+
 application.factory('TGPaginatedResource', @tg.factories.TGPaginatedResource)
 application.factory('unauthorizedInterceptor', @tg.factories.unauthorizedInterceptor)
 
@@ -17,11 +19,13 @@ application.controller('PageController', @tg.controllers.PageController)
 application.controller('TopBarController', @tg.controllers.TopBarController)
 application.controller('QuestionListController', @tg.controllers.QuestionListController)
 application.controller('QuestionController', @tg.controllers.QuestionController)
+application.controller('AnswerController', @tg.controllers.AnswerController)
 application.controller('LoginController', @tg.controllers.LoginController)
 application.controller('RegistrationController', @tg.controllers.RegistrationController)
 application.controller('ProfileController', @tg.controllers.ProfileController)
 application.controller('CityKnowledgeController', @tg.controllers.CityKnowledgeController)
 application.controller('ForbiddenController', @tg.controllers.ForbiddenController)
+application.controller('NewQuestionController', @tg.controllers.NewQuestionController)
 
 application.config( ($routeProvider, $httpProvider, TGResourceProvider) ->
 
@@ -83,6 +87,11 @@ application.config( ($routeProvider, $httpProvider, TGResourceProvider) ->
     {
       templateUrl: "#{ @TGENV.version }/templates/question_list.html",
       controller: 'QuestionListController'
+    }
+  ).when('/ask/',
+    {
+    templateUrl: "#{ @TGENV.version }/templates/new_question.html",
+    controller: 'NewQuestionController'
     }
   ).when('/cities/:city',
     {

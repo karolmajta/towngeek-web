@@ -1,14 +1,97 @@
 <div class="row" ng-show="question">
     <div class="col-lg-12">
         <h1>{{ question.text }}</h1>
-        <ul ng-repeat="answer in answers">
+        <ul ng-controller="QuestionController">
             <li>
-                {{ answer.text }}
+                <a href="/#/questions/{{ question.id }}">{{ question.text }}</a>
+                <ul>
+                    <li>
+                        <em>Autor: </em>
+                        <a ng-href="/#/profiles/{{ question.issued_by.id }}">
+                            {{ question.issued_by.first_name }} {{ question.issued_by.last_name }}
+                        </a>
+                    </li>
+                    <li>
+                        <em>Miasto: </em>
+                        <a ng-href="/#/cities/{{ question.city.id }}">
+                            {{ question.city.name }}
+                        </a>
+                    </li>
+                    <li><em>Data:</em> {{ question.issued_at|nicedate }}</li>
+                    <li><em>Liczba odpowiedzi:</em> {{ question.answer_count }}</li>
+                    <li><em>Ulubiony:</em> {{ question.bookmark_count }}</li>
+                    <li><em>Mój ulubiony:</em> <input type="checkbox"
+                                                      ng-checked="question.is_bookmarked"
+                                                      ng-click="toggleBookmark()"
+                                                      ng-disabled="isFetching"></li>
+                </ul>
             </li>
         </ul>
+        <div ng-repeat="answer in answers">
+            <div ng-controller="AnswerController">
+                <ul>
+                    <li>
+                        <p ng-repeat="paragraph in getParagraphs()">{{ paragraph }}</p>
+                        <ul>
+                            <li>
+                                {{ answer.issued_at|nicedate }}
+                            </li>
+                            <li>
+                                <a ng-href="/#/profiles/{{ answer.issued_by.id }}">
+                                    {{ answer.issued_by.first_name }} {{ answer.issued_by.last_name }}
+                                </a>
+                            </li>
+                            <li>
+                                {{ answer.issued_at }}
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <div class="form-group">
+                    <p>
+                        Score: {{ answer.score }}
+                        My vote: {{ answer.my_vote }}
+                    </p>
+                    <form role="form" name="voteForm">
+                        <label class="checkbox-inline">
+                            <input type="radio" name="vote" value="1"
+                                   ng-model="answer.my_vote"
+                                   ng-change="attemptVoteChange()"> Upvote
+                        </label>
+                        <label class="checkbox-inline">
+                            <input type="radio" name="vote" value="0"
+                                   ng-model="answer.my_vote"
+                                   ng-change="attemptVoteChange()"> Neutral
+                        </label>
+                        <label class="checkbox-inline">
+                            <input type="radio" name="vote" value="-1"
+                                   ng-model="answer.my_vote"
+                                   ng-change="attemptVoteChange()"> Downvote
+                        </label>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
     <div ng-show="answers.showSpinner">spinner...</div>
     <div ng-show="answers.haveNextPage() && !questions.showSpinner">
         <a href ng-click="answers.fetchNextPage()">Więcej...</a>
+    </div>
+    <div ng-show="currentUser.isLoggedIn()" ng-submit="attemptPostAnswer()">
+        <form name="newAnswerForm" ng-show="uploadedAnswers.length == 0">
+            <div class="form-group">
+                <label for="answer">Twoja odpowiedź</label>
+                <textarea id="answer" name="answer" class="form-control" rows="3"
+                    ng-model="newAnswer"></textarea>
+            </div>
+            <button type="submit" class="btn btn-default" ng-disabled="newAnswer.length < 1">Odpowiedz</button>
+        </form>
+        <div ng-show="uploadedAnswers.length > 0">
+            <p>
+                Dzięki! {{ question.issued_by.first_name }} <span ng-show="question.issued_by.last_name">
+                {{ question.issued_by.last_name }}
+                </span> na pewno ucieszy się z twojej pomocy!
+            </p>
+        </div>
     </div>
 </div>

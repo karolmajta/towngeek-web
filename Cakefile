@@ -15,6 +15,8 @@ versionFile = 'VERSION'
 coffeeFiles = [
   {'infile': 'application.coffee', 'outdir': ''},
 
+  {'infile': 'filters/nicedate.coffee', 'outdir': 'filters'},
+
   {'infile': 'factories/TGPaginatedResource.coffee', 'outdir': 'factories'},
   {'infile': 'factories/unauthorizedInterceptor.coffee', 'outdir': 'factories'},
 
@@ -25,11 +27,13 @@ coffeeFiles = [
   {'infile': 'controllers/TopBarController.coffee', 'outdir': 'controllers'},
   {'infile': 'controllers/QuestionListController.coffee', 'outdir': 'controllers'},
   {'infile': 'controllers/QuestionController.coffee', 'outdir': 'controllers'},
+  {'infile': 'controllers/AnswerController.coffee', 'outdir': 'controllers'},
   {'infile': 'controllers/ProfileController.coffee', 'outdir': 'controllers'},
   {'infile': 'controllers/CityKnowledgeController.coffee', 'outdir': 'controllers'},
   {'infile': 'controllers/ForbiddenController.coffee', 'outdir': 'controllers'},
   {'infile': 'controllers/LoginController.coffee', 'outdir': 'controllers'},
   {'infile': 'controllers/RegistrationController.coffee', 'outdir': 'controllers'},
+  {'infile': 'controllers/NewQuestionController.coffee', 'outdir': 'controllers'},
 ]
 
 lessMain = 'styles.less'

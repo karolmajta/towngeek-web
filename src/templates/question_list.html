@@ -16,9 +16,13 @@
                             {{ question.city.name }}
                         </a>
                     </li>
-                    <li><em>Data:</em> {{ question.issued_at }}</li>
+                    <li><em>Data:</em> {{ question.issued_at|nicedate }}</li>
+                    <li><em>Liczba odpowiedzi:</em> {{ question.answer_count }}</li>
                     <li><em>Ulubiony:</em> {{ question.bookmark_count }}</li>
-                    <li><em>Mój ulubiony:</em> <input type="checkbox" ng-checked="question.is_bookmarked"></li>
+                    <li><em>Mój ulubiony:</em> <input type="checkbox"
+                                                      ng-checked="question.is_bookmarked"
+                                                      ng-click="toggleBookmark()"
+                                                      ng-disabled="isFetching"></li>
                 </ul>
             </li>
         </ul>

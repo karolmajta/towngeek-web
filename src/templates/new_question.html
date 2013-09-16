@@ -1,0 +1,24 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h1>Dodaj pytanie</h1>
+    </div>
+    <div class="col-lg-3">
+        <label>Wybierz miasto</label>
+        <div class="radio" ng-repeat="city in cities">
+            <label>
+                <input type="radio" name="city" value="{{ city.id }}" ng-model="question.city">
+                {{ city.name }}
+            </label>
+        </div>
+    </div>
+    <div class="col-lg-9">
+        <form role="form" name="newQuestionForm" ng-submit="attemptPostQuestion()">
+            <div class="form-group">
+                <label for="question">Twoje pytanie</label>
+                <textarea rows="10" class="form-control" id="question" name="question"
+                    ng-model="question.text"></textarea>
+            </div>
+            <button type="submit" class="btn btn-default" ng-disabled="isPosting || question.text == '' || question.city == null">Zapytaj</button>
+        </form>
+    </div>
+</div>

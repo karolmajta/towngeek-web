@@ -41,7 +41,6 @@ $$.RegistrationController = ($log, $scope, $routeParams, $location, currentUser,
     $scope.formMeta.isFetching = true
 
   onRegistrationSuccess = (user) ->
-    $log.warn(user)
     currentUser.login(user.email, credentials.password1, onLoginSuccess, onLoginError)
 
   onLoginSuccess = (user) -> $location.path("/profiles/#{ user.id }")
