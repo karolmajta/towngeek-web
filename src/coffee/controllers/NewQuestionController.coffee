@@ -17,7 +17,7 @@ $$.NewQuestionController = ($log, $scope, $location, TGResource, currentUser, TG
   $scope.isPosting = false
 
   $scope.question =
-    city: null
+    city: $scope.$routeParams.city
     text: ""
 
   $scope.attemptPostQuestion = () ->

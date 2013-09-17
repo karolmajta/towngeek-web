@@ -90,8 +90,13 @@ application.config( ($routeProvider, $httpProvider, TGResourceProvider) ->
     }
   ).when('/ask/',
     {
-    templateUrl: "#{ @TGENV.version }/templates/new_question.html",
-    controller: 'NewQuestionController'
+      templateUrl: "#{ @TGENV.version }/templates/new_question.html",
+      controller: 'NewQuestionController'
+    }
+  ).when('/ask/:city',
+    {
+      templateUrl: "#{ @TGENV.version }/templates/new_question.html",
+      controller: 'NewQuestionController'
     }
   ).when('/cities/:city',
     {
