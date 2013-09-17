@@ -2,7 +2,6 @@
     <div class="col-lg-12">
         <h1 ng-show="city">{{ city.name }}</h1>
         <h1 ng-hide="city">Wszystkie miasta</h1>
-        <h3><a href="/#/ask/">Zadaj pytanie</a></h3>
         <ul ng-repeat="question in questions">
             <li ng-controller="QuestionController">
                 <a href="/#/questions/{{ question.id }}">{{ question.text }}</a>
