@@ -2,23 +2,26 @@
     <div class="col-lg-12">
         <h1>Dodaj pytanie</h1>
     </div>
-    <div class="col-lg-3">
+    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
         <label>Wybierz miasto</label>
-        <div class="radio" ng-repeat="city in cities">
-            <label>
-                <input type="radio" name="city" value="{{ city.id }}" ng-model="question.city">
-                {{ city.name }}
-            </label>
+        <div class="city-select-container">
+            <div ng-repeat="city in cities" class="city-select"">
+                <button class="btn btn-block"
+                        ng-click="question.city=city.id"
+                        ng-class="{'btn-default': question.city!=city.id, 'btn-success': question.city==city.id}">
+                    {{ city.name }}
+                </button>
+            </div>
         </div>
     </div>
-    <div class="col-lg-9">
+    <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
         <form role="form" name="newQuestionForm" ng-submit="attemptPostQuestion()">
             <div class="form-group">
                 <label for="question">Twoje pytanie</label>
                 <textarea rows="10" class="form-control" id="question" name="question"
                     ng-model="question.text"></textarea>
             </div>
-            <button type="submit" class="btn btn-default" ng-disabled="isPosting || question.text == '' || question.city == null">Zapytaj</button>
+            <button type="submit" class="btn btn-primary btn-lg btn-block" ng-disabled="isPosting || question.text == '' || question.city == null">Zapytaj</button>
         </form>
     </div>
 </div>

@@ -11,6 +11,6 @@ $$.TopBarController = ($log, $scope, $location, currentUser, TGResource, TGPagin
   rCity = TGResource.getResource('city')
   rCityList = new TGPaginatedResource(rCity, 100)
 
-  rCityList.getNextPage({}, ( (l) -> console.log(l); $scope.cities = l ), (response) -> )
+  rCityList.getNextPage({}, ( (l) -> $scope.cities = l ), (response) -> )
 
   $scope.currentCity = () -> _.find($scope.cities, (c) -> c.id == parseInt($routeParams.city))
