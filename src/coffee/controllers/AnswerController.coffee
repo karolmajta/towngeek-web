@@ -17,10 +17,24 @@ $$.AnswerController = ($log, $scope, TGResource) ->
 
   voteValue = $scope.answer.my_vote
 
-  $scope.attemptVoteChange = () ->
+  $scope.toggleUpvote = () ->
+    $log.warn("togglin...")
+    if $scope.answer.my_vote == 1
+      attemptVoteChange(0)
+    else
+      attemptVoteChange(1)
+
+  $scope.toggleDownvote = () ->
+    $log.warn("togglin d...")
+    if $scope.answer.my_vote == -1
+      attemptVoteChange(0)
+    else
+      attemptVoteChange(-1)
+
+  attemptVoteChange = (val) ->
     data =
       answer: parseInt($scope.answer.id)
-      value: parseInt($scope.answer.my_vote)
+      value: val
     rVote.post(data).then(
       ( (response) -> if response.data
           $scope.answer.my_vote = response.data.result.value
