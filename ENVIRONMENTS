@@ -1,10 +1,10 @@
 module.exports = {
   production: {
-    version: "0.0.4",
+    version: "0.0.5",
     api_root: "http://api.tg.karolmajta.com"
   },
   development: {
-    version: "0.0.4",
+    version: "0.0.5",
     api_root: "http://api.tg.karolmajta.com",
   }
 }
